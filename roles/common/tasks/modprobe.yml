@@ -1,0 +1,7 @@
+- name: load br_netfilter kernel module
+  modprobe: name=br_netfilter state=present
+  tags: modprobe
+
+- name: load nf_conntrack_ipv4 kernel module
+  modprobe: name=nf_conntrack_ipv4 state=present
+  tags: modprobe

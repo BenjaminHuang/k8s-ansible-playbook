@@ -1,0 +1,19 @@
+- name: load ip_vs kernel module
+  modprobe: name=ip_vs state=present
+  tags: modprobe
+
+- name: load ip_vs_rr kernel module
+  modprobe: name=ip_vs_rr state=present
+  tags: modprobe
+
+- name: load ip_vs_wrr kernel module
+  modprobe: name=ip_vs_wrr state=present
+  tags: modprobe
+
+- name: load ip_vs_sh kernel module
+  modprobe: name=ip_vs_sh state=present
+  tags: modprobe
+
+- name: install ipvsadm
+  apt: name=ipvsadm state=present
+  tags: ipvsadm

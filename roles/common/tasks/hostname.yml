@@ -1,0 +1,8 @@
+- name: setting hostname
+  hostname: name={{inventory_hostname}}
+
+- name: preserved hostname change
+  lineinfile:
+    path: /etc/cloud/cloud.cfg
+    regexp: '^preserve_hostname: false'
+    line: 'preserve_hostname: true'

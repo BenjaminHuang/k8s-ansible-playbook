@@ -1,0 +1,40 @@
+---
+- name: setting hostname
+  include: hostname.yml
+  tags: hostname
+
+- name: setting env variable
+  include: env.yml
+  tags: env
+
+- name: disable ufw
+  include: ufw.yml
+  tags: ufw
+
+- name: apt repo
+  include: apt.yml
+  tags: apt
+
+- name: container runtime interface initialize
+  include: cri.yml
+  tags: cri
+
+- name: sysctl-related initialize
+  include: sysctl.yml
+  tags: sysctl
+
+- name: modprobe-related initialize
+  include: modprobe.yml
+  tags: modprobe
+
+- name: disable swap
+  include: swapoff.yml
+  tags: swapoff
+
+- name: initialize ipvs
+  include: ipvs.yml
+  tags: ipvs
+
+- name: pull gcr docker images and re-tag
+  include: gcr.yml
+  tags: gcr

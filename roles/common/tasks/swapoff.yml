@@ -1,0 +1,12 @@
+- name: disable swap by swapoff
+  shell: swapoff -a
+
+- name: disable swap in by sysctl
+  sysctl: name=vm.swappiness value=0
+  tags: sysctl
+
+- name: erase swap mount in fstab
+  lineinfile:
+    path: /etc/fstab
+    regex: "swap.img"
+    line: "#/swap.img	none	swap	sw	0	0"

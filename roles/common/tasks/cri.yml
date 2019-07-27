@@ -1,0 +1,17 @@
+- name: ensure docker.io has been installed
+  apt:
+    name: docker.io
+    state: present
+
+- name: config docker to use systemd as cgroup driver
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: force restart docker daemon
+  systemd:
+    name: docker
+    masked: false
+    enabled: yes
+    daemon-reload: yes
+    state: restarted 

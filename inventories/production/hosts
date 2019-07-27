@@ -1,0 +1,14 @@
+[k8s_labs]
+#k8s-labs-1    ansible_ssh_host=172.1.1.114
+#k8s-labs-2    ansible_ssh_host=172.1.1.116
+#k8s-labs-3    ansible_ssh_host=172.1.1.117
+#k8s-labs-4    ansible_ssh_host=172.1.1.119
+#k8s-labs-5    ansible_ssh_host=172.1.1.118
+k8s-master-1   ansible_ssh_host=172.1.1.103
+k8s-worker-1   ansible_ssh_host=172.1.1.107
+k8s-worker-2   ansible_ssh_host=172.1.1.109
+
+[k8s_labs:vars]
+ansible_ssh_user=ben
+ansible_become_pass='admin'
+ansible_ssh_pass='admin'

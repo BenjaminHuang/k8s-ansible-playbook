@@ -1,0 +1,6 @@
+- name: copy gcr image pull script
+  copy: src=master_gcr_image_pull.sh dest=/tmp/gcr_image_pull.sh
+
+- name: execute script to pull gcr images
+  shell: bash -x /tmp/gcr_image_pull.sh
+  tags: gcr_img_pull

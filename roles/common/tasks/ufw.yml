@@ -1,0 +1,2 @@
+- name: ensure ufw is disable
+  systemd: name=ufw state=stopped

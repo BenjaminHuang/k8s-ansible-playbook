@@ -1,0 +1,28 @@
+---
+
+- name: using aliyun apt mirror
+  copy:
+    src: sources.list
+    dest: /etc/apt/sources.list
+
+- name: add aliyun k8s mirror apt key
+  shell: curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+
+- name: add aliyun k8s mirror repo cfg
+  copy:
+    src: kubernetes.list
+    dest: /etc/apt/sources.list.d/kubernetes.list
+
+- name: apt-get update
+  apt: update_cache=yes
+
+- name: install a list of packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - apt-transport-https
+    - kubelet
+    - kubeadm
+    - kubectl

@@ -1,0 +1,8 @@
+- name: sysctl config update (net.bridge.bridge-nf-call-ip6tables)
+  sysctl: name=net.bridge.bridge-nf-call-ip6tables value=1
+
+- name: sysctl config update (net.bridge.bridge-nf-call-iptables)
+  sysctl: name=net.bridge.bridge-nf-call-iptables value=1
+ 
+- name: sysctl config update (net.ipv4.ip_forward) 
+  sysctl: name=net.ipv4.ip_forward value=1
