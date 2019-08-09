@@ -23,6 +23,7 @@
   vars:
     packages:
     - apt-transport-https
+    - lrzsz
     - kubelet
     - kubeadm
     - kubectl
