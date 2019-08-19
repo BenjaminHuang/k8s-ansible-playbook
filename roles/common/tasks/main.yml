@@ -38,3 +38,11 @@
 - name: pull gcr docker images and re-tag
   include: gcr.yml
   tags: gcr
+
+- name: setting up journald
+  include: journald.yml
+  tags: journald
+
+- name: setting up date and time
+  include: datetime.yml
+  tags: datetime

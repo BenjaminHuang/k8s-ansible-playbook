@@ -13,3 +13,11 @@
     enabled: yes
     daemon-reload: no
     state: restarted
+
+- name: restart etcd
+  systemd:
+    name: etcd
+    masked: false
+    enabled: yes
+    daemon-reload: yes
+    state: restarted

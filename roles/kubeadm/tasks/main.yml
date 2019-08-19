@@ -1,0 +1,4 @@
+---
+- name: pull gcr docker images and re-tag
+  include: gcr.yml
+  tags: gcr

@@ -1,0 +1,31 @@
+- name: create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/kubernetes/bin
+    - /etc/kubernetes/cert
+    - /etc/etcd/cert
+
+- name: setting path env
+  lineinfile:
+    path: /etc/bash.bashrc
+    line: export PATH=/opt/kubernetes/bin:$PATH
+
+- name: setting etcd api version env
+  lineinfile:
+    path: /etc/bash.bashrc
+    line: export ETCDCTL_API=3
+
+- name: copy kubectl config on master nodes
+  copy:
+    src: kubectl.kubeconfig
+    dest: /etc/kubernetes/kubectl.conf
+  when: "'master' in inventory_hostname"
+  tags: kubectl
+
+- name: copy ca-cert on master nodes
+  copy: src={{ item }} dest=/etc/kubernetes/cert
+  with_items:
+    - ca.pem
+    - ca-key.pem

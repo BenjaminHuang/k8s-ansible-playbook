@@ -6,3 +6,31 @@
  
 - name: sysctl config update (net.ipv4.ip_forward) 
   sysctl: name=net.ipv4.ip_forward value=1
+
+  #- name: net.ipv4.tcp_tw_recycle
+  #sysctl: name=net.ipv4.tcp_tw_recycle value=0
+
+- name: net.ipv6.conf.all.disable_ipv6
+  sysctl: name=net.ipv6.conf.all.disable_ipv6 value=1
+
+- name: net.netfilter.nf_conntrack_max
+  sysctl: name=net.netfilter.nf_conntrack_max value=2310720
+
+- name: fs.inotify.max_user_instances
+  sysctl: name=fs.inotify.max_user_instances value=8192
+
+- name: fs.inotify.max_user_watches
+  sysctl: name=fs.inotify.max_user_watches value=1048576
+
+- name: fs.file-max
+  sysctl: name=fs.file-max value=52706963
+
+- name: fs.nr_open
+  sysctl: name=fs.nr_open value=52706963
+
+- name: vm.overcommit_memory
+  sysctl: name=vm.overcommit_memory value=1
+
+- name: vm.panic_on_oom
+  sysctl: name=vm.panic_on_oom value=0
+

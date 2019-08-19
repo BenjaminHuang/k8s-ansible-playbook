@@ -1,6 +1,20 @@
 ---
-- hosts: k8s_labs
+
+- hosts: all
   gather_facts: false
   become: yes
   roles:
     - common
+
+- hosts: k8s_kubeadm
+  gather_facts: false
+  become: yes
+  roles:
+    - kubeadm
+
+- hosts: k8s_native
+  gather_facts: false
+  become: yes
+  roles:
+    - native
+

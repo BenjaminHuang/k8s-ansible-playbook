@@ -1,0 +1,7 @@
+- name: base environment setup
+  include: base.yml
+  tags: base
+
+- name: deploy etcd
+  include: etcd.yml
+  tags: etcd

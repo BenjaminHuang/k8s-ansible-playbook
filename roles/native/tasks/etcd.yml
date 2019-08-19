@@ -1,0 +1,28 @@
+- name: install etcd
+  apt:
+    name: etcd=3.*
+    state: present
+
+- name: copy certificates for etcd deployment
+  copy:
+    src: "{{ item }}"
+    dest: /etc/etcd/cert/
+  with_items:
+    - etcd.pem
+    - etcd-key.pem 
+
+- name: modify systemd unit config
+  template:
+    src: etcd.service.j2
+    dest:  /lib/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: ensure etcd running as system service
+  systemd:
+    name: etcd
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+

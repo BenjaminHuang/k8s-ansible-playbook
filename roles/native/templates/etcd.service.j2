@@ -1,0 +1,42 @@
+[Unit]
+Description=etcd - highly-available key value store
+Documentation=https://github.com/coreos/etcd
+Documentation=man:etcd
+After=network.target
+Wants=network-online.target
+
+[Service]
+Environment=DAEMON_ARGS="\
+--name {{ inventory_hostname }} \
+--data-dir /var/lib/etcd/default/ \
+--cert-file /etc/etcd/cert/etcd.pem \
+--key-file /etc/etcd/cert/etcd-key.pem \
+--trusted-ca-file /etc/kubernetes/cert/ca.pem \
+--peer-cert-file /etc/etcd/cert/etcd.pem \
+--peer-key-file /etc/etcd/cert/etcd-key.pem \
+--peer-trusted-ca-file /etc/kubernetes/cert/ca.pem \
+--peer-client-cert-auth --client-cert-auth \
+--listen-peer-urls https://{{ ansible_host }}:2380 \
+--initial-advertise-peer-urls https://{{ ansible_host }}:2380 \
+--listen-client-urls https://{{ ansible_host }}:2379,https://127.0.0.1:2379 \
+--advertise-client-urls https://{{ ansible_host }}:2379 \
+--initial-cluster-token etcd-cluster-0 \
+--initial-cluster {{ etcd_cluster_nodes }} \
+--initial-cluster-state new \
+--max-request-bytes=33554432 --quota-backend-bytes 6442450944 \
+--heartbeat-interval 250 --election-timeout 2000"
+Environment=ETCD_NAME=%H
+Environment=ETCD_DATA_DIR=/var/lib/etcd/default
+EnvironmentFile=-/etc/default/%p
+Type=notify
+User=etcd
+PermissionsStartOnly=true
+#ExecStart=/bin/sh -c "GOMAXPROCS=$(nproc) /usr/bin/etcd $DAEMON_ARGS"
+ExecStart=/usr/bin/etcd $DAEMON_ARGS
+Restart=on-abnormal
+#RestartSec=10s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+Alias=etcd2.service
