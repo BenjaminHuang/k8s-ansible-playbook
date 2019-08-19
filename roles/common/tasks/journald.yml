@@ -1,0 +1,11 @@
+- name: create config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /var/log/journal
+    - /etc/systemd/journald.conf.d
+
+- name: copy config file
+  copy: src=99-prophet.conf dest=/etc/systemd/journald.conf.d
+  notify: reload journald
