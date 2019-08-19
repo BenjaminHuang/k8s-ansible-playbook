@@ -1,0 +1,13 @@
+- name: setting timezone
+  timezone: name=Asia/Shanghai
+
+- name: install chrony
+  apt:
+    name: chrony
+    state: present
+
+- name: ensure chronyd enabled and started
+  systemd:
+    name: chronyd
+    enabled: yes
+    state: started
