@@ -1,0 +1,1 @@
+etcd_cluster_nodes: master-1=https://192.168.0.100:2380,master-2=https://192.168.0.101:2380,master-3=https://192.168.0.102:2380
